@@ -11,13 +11,6 @@ async function main() {
   writeNewMissionData(newMission);
 
   console.log('Nova missão registrada com sucesso');
-//  writeNewMissionData({
-//     "id": 100,
-//     "name": "Tryber 1",
-//     "year": "2004",
-//     "country": "USA",
-//     "destination": "Mercúrio"
-//  })
 }
 
 main();
