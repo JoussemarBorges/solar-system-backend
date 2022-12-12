@@ -7,6 +7,7 @@ async function readMissionsData() {
   try {
     const data = await fs.readFile(path.resolve(__dirname, MISSION_DATA_PATH));
     const missions = JSON.parse(data);
+    console.log(missions);
     return missions;
   } catch (error) {
     console.error(`Erro na leitura do arquivo: ${error}`);
@@ -17,7 +18,7 @@ async function writeNewMissionData(newMission) {
   try {
     const oldMissions = await readMissionsData();
     const newMissionWhitId = { id: Date.now(), ...newMission };
-    const allMissions = JSON.stringify([...oldMissions, newMissionWhitId]);
+    const allMissions = JSON.stringify([...oldMissions, newMissionWhitId], null, 2);
 
     await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), allMissions);
 
@@ -36,7 +37,7 @@ async function updateMissionData(id, updatedMissionData) {
     return [...missionsList, currentMission];
   }, []);
 
-  const updatedData = JSON.stringify(updatedMissions);
+  const updatedData = JSON.stringify(updatedMissions, null, 2);
 
   try {
     await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), updatedData);
@@ -51,7 +52,7 @@ async function deleteMissionData(id) {
   const oldMissions = await readMissionsData();
   const updatedMissions = oldMissions.filter((mission) => mission.id !== Number(id));
 
-  const updateData = JSON.stringify(updatedMissions);
+  const updateData = JSON.stringify(updatedMissions, null, 2);
   try {
     await fs.writeFile(path.resolve(__dirname, MISSION_DATA_PATH), updateData);
   } catch (error) {

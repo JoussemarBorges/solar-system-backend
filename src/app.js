@@ -16,7 +16,6 @@ const DELETED = 204;
 app.get('/missions/', async (req, res) => {
   try {
     const missions = await readMissionsData();
-
     return res.status(OK).json({ missions });
   } catch (error) {
     console.log(error);
